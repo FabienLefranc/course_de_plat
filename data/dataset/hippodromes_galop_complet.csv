@@ -1,0 +1,562 @@
+Hippodrome,Surface,Distance_m,Mois_activite
+SAINT-CLOUD,Gazon,800,mars-octobre
+SAINT-CLOUD,Gazon,900,mars-octobre
+SAINT-CLOUD,Gazon,1200,mars-octobre
+SAINT-CLOUD,Gazon,1300,mars-octobre
+SAINT-CLOUD,Gazon,1400,mars-octobre
+SAINT-CLOUD,Gazon,1500,mars-octobre
+SAINT-CLOUD,Gazon,1600,mars-octobre
+SAINT-CLOUD,Gazon,2000,mars-octobre
+SAINT-CLOUD,Gazon,2100,mars-octobre
+SAINT-CLOUD,Gazon,2400,mars-octobre
+SAINT-CLOUD,Gazon,2500,mars-octobre
+SAINT-CLOUD,Gazon,2800,mars-octobre
+SAINT-CLOUD,Gazon,2900,mars-octobre
+SAINT-CLOUD,Gazon,3000,mars-octobre
+SAINT-CLOUD,Gazon,3100,mars-octobre
+LYON-PARILLY,Gazon,900,avril-octobre
+LYON-PARILLY,Gazon,1000,avril-octobre
+LYON-PARILLY,Gazon,1200,avril-octobre
+LYON-PARILLY,Gazon,1350,avril-octobre
+LYON-PARILLY,Gazon,1600,avril-octobre
+LYON-PARILLY,Gazon,2000,avril-octobre
+LYON-PARILLY,Gazon,2200,avril-octobre
+LYON-PARILLY,Gazon,2400,avril-octobre
+LYON-PARILLY,Gazon,2600,avril-octobre
+LYON-PARILLY,Gazon,2800,avril-octobre
+LYON-PARILLY,Gazon,3150,avril-octobre
+LYON-PARILLY,Gazon,3400,avril-octobre
+LA CEPIERE,Gazon,1000,avril-octobre
+LA CEPIERE,Gazon,1200,avril-octobre
+LA CEPIERE,Gazon,1400,avril-octobre
+LA CEPIERE,Gazon,1600,avril-octobre
+LA CEPIERE,Gazon,1800,avril-octobre
+LA CEPIERE,Gazon,2000,avril-octobre
+LA CEPIERE,Gazon,2200,avril-octobre
+LA CEPIERE,Gazon,2400,avril-octobre
+ParisLongchamp,Gazon,1000,mars-octobre
+ParisLongchamp,Gazon,1300,mars-octobre
+ParisLongchamp,Gazon,1400,mars-octobre
+ParisLongchamp,Gazon,1500,mars-octobre
+ParisLongchamp,Gazon,1600,mars-octobre
+ParisLongchamp,Gazon,1700,mars-octobre
+ParisLongchamp,Gazon,1800,mars-octobre
+ParisLongchamp,Gazon,1850,mars-octobre
+ParisLongchamp,Gazon,1900,mars-octobre
+ParisLongchamp,Gazon,1950,mars-octobre
+ParisLongchamp,Gazon,2000,mars-octobre
+ParisLongchamp,Gazon,2100,mars-octobre
+ParisLongchamp,Gazon,2150,mars-octobre
+ParisLongchamp,Gazon,2200,mars-octobre
+ParisLongchamp,Gazon,2250,mars-octobre
+ParisLongchamp,Gazon,2300,mars-octobre
+ParisLongchamp,Gazon,2400,mars-octobre
+ParisLongchamp,Gazon,2500,mars-octobre
+ParisLongchamp,Gazon,2600,mars-octobre
+ParisLongchamp,Gazon,2700,mars-octobre
+ParisLongchamp,Gazon,2800,mars-octobre
+ParisLongchamp,Gazon,3000,mars-octobre
+ParisLongchamp,Gazon,3100,mars-octobre
+ParisLongchamp,Gazon,3200,mars-octobre
+ParisLongchamp,Gazon,3400,mars-octobre
+ParisLongchamp,Gazon,3500,mars-octobre
+ParisLongchamp,Gazon,3700,mars-octobre
+ParisLongchamp,Gazon,3800,mars-octobre
+ParisLongchamp,Gazon,4000,mars-octobre
+BORELY,Gazon,950,avril-octobre
+BORELY,Gazon,1000,avril-octobre
+BORELY,Gazon,1200,avril-octobre
+BORELY,Gazon,1600,avril-octobre
+BORELY,Gazon,1800,avril-octobre
+BORELY,Gazon,2000,avril-octobre
+BORELY,Gazon,2100,avril-octobre
+BORELY,Gazon,2600,avril-octobre
+BORELY,PSF,950,novembre-mars
+BORELY,PSF,1300,novembre-mars
+BORELY,PSF,1500,novembre-mars
+BORELY,PSF,2000,novembre-mars
+BORELY,PSF,2600,novembre-mars
+CHANTILLY,Gazon,800,mars-novembre
+CHANTILLY,Gazon,1000,mars-novembre
+CHANTILLY,Gazon,1100,mars-novembre
+CHANTILLY,Gazon,1200,mars-novembre
+CHANTILLY,Gazon,1400,mars-novembre
+CHANTILLY,Gazon,1600,mars-novembre
+CHANTILLY,Gazon,1800,mars-novembre
+CHANTILLY,Gazon,2000,mars-novembre
+CHANTILLY,Gazon,2100,mars-novembre
+CHANTILLY,Gazon,2200,mars-novembre
+CHANTILLY,Gazon,2400,mars-novembre
+CHANTILLY,Gazon,3000,mars-novembre
+CHANTILLY,Gazon,3600,mars-novembre
+CHANTILLY,Gazon,4100,mars-novembre
+CHANTILLY,Gazon,4800,mars-novembre
+CHANTILLY,PSF,1200,novembre-mars
+CHANTILLY,PSF,1300,novembre-mars
+CHANTILLY,PSF,1400,novembre-mars
+CHANTILLY,PSF,1500,novembre-mars
+CHANTILLY,PSF,1600,novembre-mars
+CHANTILLY,PSF,1700,novembre-mars
+CHANTILLY,PSF,1800,novembre-mars
+CHANTILLY,PSF,1900,novembre-mars
+CHANTILLY,PSF,2100,novembre-mars
+CHANTILLY,PSF,2600,novembre-mars
+CHANTILLY,PSF,2700,novembre-mars
+CHANTILLY,PSF,2800,novembre-mars
+CHANTILLY,PSF,2900,novembre-mars
+CHANTILLY,PSF,3000,novembre-mars
+CHANTILLY,PSF,3100,novembre-mars
+CHANTILLY,PSF,3200,novembre-mars
+LA TESTE,Gazon,1000,avril-octobre
+LA TESTE,Gazon,1200,avril-octobre
+LA TESTE,Gazon,1400,avril-octobre
+LA TESTE,Gazon,1600,avril-octobre
+LA TESTE,Gazon,1800,avril-octobre
+LA TESTE,Gazon,2000,avril-octobre
+LA TESTE,Gazon,2200,avril-octobre
+LA TESTE,Gazon,2400,avril-octobre
+CRAON,Gazon,1000,avril-octobre
+CRAON,Gazon,1200,avril-octobre
+CRAON,Gazon,1400,avril-octobre
+CRAON,Gazon,1600,avril-octobre
+CRAON,Gazon,1800,avril-octobre
+CRAON,Gazon,2000,avril-octobre
+CRAON,Gazon,2200,avril-octobre
+CRAON,Gazon,2400,avril-octobre
+CAVAILLON,Gazon,1000,avril-octobre
+CAVAILLON,Gazon,1200,avril-octobre
+CAVAILLON,Gazon,1400,avril-octobre
+CAVAILLON,Gazon,1600,avril-octobre
+CAVAILLON,Gazon,1800,avril-octobre
+CAVAILLON,Gazon,2000,avril-octobre
+CAVAILLON,Gazon,2200,avril-octobre
+CAVAILLON,Gazon,2400,avril-octobre
+LE BOUSCAT,Gazon,1000,avril-octobre
+LE BOUSCAT,Gazon,1200,avril-octobre
+LE BOUSCAT,Gazon,1400,avril-octobre
+LE BOUSCAT,Gazon,1600,avril-octobre
+LE BOUSCAT,Gazon,1800,avril-octobre
+LE BOUSCAT,Gazon,2000,avril-octobre
+LE BOUSCAT,Gazon,2200,avril-octobre
+LE BOUSCAT,Gazon,2400,avril-octobre
+MONT DE MARSAN,Gazon,1000,avril-octobre
+MONT DE MARSAN,Gazon,1200,avril-octobre
+MONT DE MARSAN,Gazon,1400,avril-octobre
+MONT DE MARSAN,Gazon,1600,avril-octobre
+MONT DE MARSAN,Gazon,1800,avril-octobre
+MONT DE MARSAN,Gazon,2000,avril-octobre
+MONT DE MARSAN,Gazon,2200,avril-octobre
+MONT DE MARSAN,Gazon,2400,avril-octobre
+ANGERS,Gazon,1000,avril-octobre
+ANGERS,Gazon,1200,avril-octobre
+ANGERS,Gazon,1400,avril-octobre
+ANGERS,Gazon,1600,avril-octobre
+ANGERS,Gazon,1800,avril-octobre
+ANGERS,Gazon,2000,avril-octobre
+ANGERS,Gazon,2200,avril-octobre
+ANGERS,Gazon,2400,avril-octobre
+LE MANS,Gazon,1000,avril-octobre
+LE MANS,Gazon,1200,avril-octobre
+LE MANS,Gazon,1400,avril-octobre
+LE MANS,Gazon,1600,avril-octobre
+LE MANS,Gazon,1800,avril-octobre
+LE MANS,Gazon,2000,avril-octobre
+LE MANS,Gazon,2200,avril-octobre
+LE MANS,Gazon,2400,avril-octobre
+DAX,Gazon,1000,avril-octobre
+DAX,Gazon,1200,avril-octobre
+DAX,Gazon,1400,avril-octobre
+DAX,Gazon,1600,avril-octobre
+DAX,Gazon,1800,avril-octobre
+DAX,Gazon,2000,avril-octobre
+DAX,Gazon,2200,avril-octobre
+DAX,Gazon,2400,avril-octobre
+SALON DE PROVENCE,Gazon,1000,avril-octobre
+SALON DE PROVENCE,Gazon,1200,avril-octobre
+SALON DE PROVENCE,Gazon,1400,avril-octobre
+SALON DE PROVENCE,Gazon,1600,avril-octobre
+SALON DE PROVENCE,Gazon,1800,avril-octobre
+SALON DE PROVENCE,Gazon,2000,avril-octobre
+SALON DE PROVENCE,Gazon,2200,avril-octobre
+SALON DE PROVENCE,Gazon,2400,avril-octobre
+STRASBOURG,Gazon,1000,avril-octobre
+STRASBOURG,Gazon,1200,avril-octobre
+STRASBOURG,Gazon,1400,avril-octobre
+STRASBOURG,Gazon,1600,avril-octobre
+STRASBOURG,Gazon,1800,avril-octobre
+STRASBOURG,Gazon,2000,avril-octobre
+STRASBOURG,Gazon,2200,avril-octobre
+STRASBOURG,Gazon,2400,avril-octobre
+COMPIEGNE,Gazon,1000,avril-octobre
+COMPIEGNE,Gazon,1200,avril-octobre
+COMPIEGNE,Gazon,1400,avril-octobre
+COMPIEGNE,Gazon,1600,avril-octobre
+COMPIEGNE,Gazon,1800,avril-octobre
+COMPIEGNE,Gazon,2000,avril-octobre
+COMPIEGNE,Gazon,2200,avril-octobre
+COMPIEGNE,Gazon,2400,avril-octobre
+MOULINS,Gazon,1000,avril-octobre
+MOULINS,Gazon,1200,avril-octobre
+MOULINS,Gazon,1400,avril-octobre
+MOULINS,Gazon,1600,avril-octobre
+MOULINS,Gazon,1800,avril-octobre
+MOULINS,Gazon,2000,avril-octobre
+MOULINS,Gazon,2200,avril-octobre
+MOULINS,Gazon,2400,avril-octobre
+LE CROISE LAROCHE,Gazon,1000,avril-octobre
+LE CROISE LAROCHE,Gazon,1200,avril-octobre
+LE CROISE LAROCHE,Gazon,1400,avril-octobre
+LE CROISE LAROCHE,Gazon,1600,avril-octobre
+LE CROISE LAROCHE,Gazon,1800,avril-octobre
+LE CROISE LAROCHE,Gazon,2000,avril-octobre
+LE CROISE LAROCHE,Gazon,2200,avril-octobre
+LE CROISE LAROCHE,Gazon,2400,avril-octobre
+LE LION D'ANGERS,Gazon,1000,avril-octobre
+LE LION D'ANGERS,Gazon,1200,avril-octobre
+LE LION D'ANGERS,Gazon,1400,avril-octobre
+LE LION D'ANGERS,Gazon,1600,avril-octobre
+LE LION D'ANGERS,Gazon,1800,avril-octobre
+LE LION D'ANGERS,Gazon,2000,avril-octobre
+LE LION D'ANGERS,Gazon,2200,avril-octobre
+LE LION D'ANGERS,Gazon,2400,avril-octobre
+FONTAINEBLEAU,Gazon,1000,avril-octobre
+FONTAINEBLEAU,Gazon,1200,avril-octobre
+FONTAINEBLEAU,Gazon,1400,avril-octobre
+FONTAINEBLEAU,Gazon,1600,avril-octobre
+FONTAINEBLEAU,Gazon,1800,avril-octobre
+FONTAINEBLEAU,Gazon,2000,avril-octobre
+FONTAINEBLEAU,Gazon,2200,avril-octobre
+FONTAINEBLEAU,Gazon,2400,avril-octobre
+VICHY,Gazon,1000,avril-octobre
+VICHY,Gazon,1200,avril-octobre
+VICHY,Gazon,1400,avril-octobre
+VICHY,Gazon,1600,avril-octobre
+VICHY,Gazon,1800,avril-octobre
+VICHY,Gazon,2000,avril-octobre
+VICHY,Gazon,2200,avril-octobre
+VICHY,Gazon,2400,avril-octobre
+AMIENS,Gazon,1000,avril-octobre
+AMIENS,Gazon,1200,avril-octobre
+AMIENS,Gazon,1400,avril-octobre
+AMIENS,Gazon,1600,avril-octobre
+AMIENS,Gazon,1800,avril-octobre
+AMIENS,Gazon,2000,avril-octobre
+AMIENS,Gazon,2200,avril-octobre
+AMIENS,Gazon,2400,avril-octobre
+NANCY-BRABOIS,Gazon,1000,avril-octobre
+NANCY-BRABOIS,Gazon,1200,avril-octobre
+NANCY-BRABOIS,Gazon,1400,avril-octobre
+NANCY-BRABOIS,Gazon,1600,avril-octobre
+NANCY-BRABOIS,Gazon,1800,avril-octobre
+NANCY-BRABOIS,Gazon,2000,avril-octobre
+NANCY-BRABOIS,Gazon,2200,avril-octobre
+NANCY-BRABOIS,Gazon,2400,avril-octobre
+LYON LA SOIE,Gazon,1000,avril-octobre
+LYON LA SOIE,Gazon,1200,avril-octobre
+LYON LA SOIE,Gazon,1400,avril-octobre
+LYON LA SOIE,Gazon,1600,avril-octobre
+LYON LA SOIE,Gazon,1800,avril-octobre
+LYON LA SOIE,Gazon,2000,avril-octobre
+LYON LA SOIE,Gazon,2200,avril-octobre
+LYON LA SOIE,Gazon,2400,avril-octobre
+NIMES,Gazon,1000,avril-octobre
+NIMES,Gazon,1200,avril-octobre
+NIMES,Gazon,1400,avril-octobre
+NIMES,Gazon,1600,avril-octobre
+NIMES,Gazon,1800,avril-octobre
+NIMES,Gazon,2000,avril-octobre
+NIMES,Gazon,2200,avril-octobre
+NIMES,Gazon,2400,avril-octobre
+SAINT BRIEUC,Gazon,1000,avril-octobre
+SAINT BRIEUC,Gazon,1200,avril-octobre
+SAINT BRIEUC,Gazon,1400,avril-octobre
+SAINT BRIEUC,Gazon,1600,avril-octobre
+SAINT BRIEUC,Gazon,1800,avril-octobre
+SAINT BRIEUC,Gazon,2000,avril-octobre
+SAINT BRIEUC,Gazon,2200,avril-octobre
+SAINT BRIEUC,Gazon,2400,avril-octobre
+ARGENTAN,Gazon,1000,avril-octobre
+ARGENTAN,Gazon,1200,avril-octobre
+ARGENTAN,Gazon,1400,avril-octobre
+ARGENTAN,Gazon,1600,avril-octobre
+ARGENTAN,Gazon,1800,avril-octobre
+ARGENTAN,Gazon,2000,avril-octobre
+ARGENTAN,Gazon,2200,avril-octobre
+ARGENTAN,Gazon,2400,avril-octobre
+PONT DE VIVAUX,Gazon,950,avril-octobre
+PONT DE VIVAUX,Gazon,1000,avril-octobre
+PONT DE VIVAUX,Gazon,1200,avril-octobre
+PONT DE VIVAUX,Gazon,1600,avril-octobre
+PONT DE VIVAUX,Gazon,1800,avril-octobre
+PONT DE VIVAUX,Gazon,2000,avril-octobre
+PONT DE VIVAUX,Gazon,2100,avril-octobre
+PONT DE VIVAUX,Gazon,2600,avril-octobre
+PONT DE VIVAUX,PSF,950,novembre-mars
+PONT DE VIVAUX,PSF,1300,novembre-mars
+PONT DE VIVAUX,PSF,1500,novembre-mars
+PONT DE VIVAUX,PSF,2000,novembre-mars
+PONT DE VIVAUX,PSF,2600,novembre-mars
+LES SABLES D OLONNE,Gazon,1000,avril-octobre
+LES SABLES D OLONNE,Gazon,1200,avril-octobre
+LES SABLES D OLONNE,Gazon,1400,avril-octobre
+LES SABLES D OLONNE,Gazon,1600,avril-octobre
+LES SABLES D OLONNE,Gazon,1800,avril-octobre
+LES SABLES D OLONNE,Gazon,2000,avril-octobre
+LES SABLES D OLONNE,Gazon,2200,avril-octobre
+LES SABLES D OLONNE,Gazon,2400,avril-octobre
+HYERES,Gazon,1000,avril-octobre
+HYERES,Gazon,1200,avril-octobre
+HYERES,Gazon,1400,avril-octobre
+HYERES,Gazon,1600,avril-octobre
+HYERES,Gazon,1800,avril-octobre
+HYERES,Gazon,2000,avril-octobre
+HYERES,Gazon,2200,avril-octobre
+HYERES,Gazon,2400,avril-octobre
+MACON-CLUNY,Gazon,1000,avril-octobre
+MACON-CLUNY,Gazon,1200,avril-octobre
+MACON-CLUNY,Gazon,1400,avril-octobre
+MACON-CLUNY,Gazon,1600,avril-octobre
+MACON-CLUNY,Gazon,1800,avril-octobre
+MACON-CLUNY,Gazon,2000,avril-octobre
+MACON-CLUNY,Gazon,2200,avril-octobre
+MACON-CLUNY,Gazon,2400,avril-octobre
+TARBES,Gazon,1000,avril-octobre
+TARBES,Gazon,1200,avril-octobre
+TARBES,Gazon,1400,avril-octobre
+TARBES,Gazon,1600,avril-octobre
+TARBES,Gazon,1800,avril-octobre
+TARBES,Gazon,2000,avril-octobre
+TARBES,Gazon,2200,avril-octobre
+TARBES,Gazon,2400,avril-octobre
+NANTES,Gazon,1000,avril-octobre
+NANTES,Gazon,1200,avril-octobre
+NANTES,Gazon,1400,avril-octobre
+NANTES,Gazon,1600,avril-octobre
+NANTES,Gazon,1800,avril-octobre
+NANTES,Gazon,2000,avril-octobre
+NANTES,Gazon,2200,avril-octobre
+NANTES,Gazon,2400,avril-octobre
+DEAUVILLE,Gazon,900,juillet-octobre
+DEAUVILLE,Gazon,1000,juillet-octobre
+DEAUVILLE,Gazon,1100,juillet-octobre
+DEAUVILLE,Gazon,1200,juillet-octobre
+DEAUVILLE,Gazon,1300,juillet-octobre
+DEAUVILLE,Gazon,1400,juillet-octobre
+DEAUVILLE,Gazon,1500,juillet-octobre
+DEAUVILLE,Gazon,1600,juillet-octobre
+DEAUVILLE,Gazon,2000,juillet-octobre
+DEAUVILLE,Gazon,2500,juillet-octobre
+DEAUVILLE,Gazon,2700,juillet-octobre
+DEAUVILLE,Gazon,2800,juillet-octobre
+DEAUVILLE,Gazon,3000,juillet-octobre
+DEAUVILLE,Gazon,3200,juillet-octobre
+DEAUVILLE,Gazon,3400,juillet-octobre
+DEAUVILLE,Gazon,3600,juillet-octobre
+DEAUVILLE,PSF,1300,novembre-mars
+DEAUVILLE,PSF,1400,novembre-mars
+DEAUVILLE,PSF,1500,novembre-mars
+DEAUVILLE,PSF,1900,novembre-mars
+DEAUVILLE,PSF,2500,novembre-mars
+DEAUVILLE,PSF,3400,novembre-mars
+CLAIREFONTAINE,Gazon,1000,avril-octobre
+CLAIREFONTAINE,Gazon,1200,avril-octobre
+CLAIREFONTAINE,Gazon,1400,avril-octobre
+CLAIREFONTAINE,Gazon,1600,avril-octobre
+CLAIREFONTAINE,Gazon,1800,avril-octobre
+CLAIREFONTAINE,Gazon,2000,avril-octobre
+CLAIREFONTAINE,Gazon,2200,avril-octobre
+CLAIREFONTAINE,Gazon,2400,avril-octobre
+PAU,PSF,1200,novembre-fevrier
+PAU,PSF,1300,novembre-fevrier
+PAU,PSF,1400,novembre-fevrier
+PAU,PSF,1500,novembre-fevrier
+PAU,PSF,1600,novembre-fevrier
+PAU,PSF,2000,novembre-fevrier
+PAU,PSF,2400,novembre-fevrier
+PAU,PSF,2600,novembre-fevrier
+AGEN LA GARENNE,Gazon,1000,avril-octobre
+AGEN LA GARENNE,Gazon,1200,avril-octobre
+AGEN LA GARENNE,Gazon,1400,avril-octobre
+AGEN LA GARENNE,Gazon,1600,avril-octobre
+AGEN LA GARENNE,Gazon,1800,avril-octobre
+AGEN LA GARENNE,Gazon,2000,avril-octobre
+AGEN LA GARENNE,Gazon,2200,avril-octobre
+AGEN LA GARENNE,Gazon,2400,avril-octobre
+LIGNIERES,Gazon,1000,avril-octobre
+LIGNIERES,Gazon,1200,avril-octobre
+LIGNIERES,Gazon,1400,avril-octobre
+LIGNIERES,Gazon,1600,avril-octobre
+LIGNIERES,Gazon,1800,avril-octobre
+LIGNIERES,Gazon,2000,avril-octobre
+LIGNIERES,Gazon,2200,avril-octobre
+LIGNIERES,Gazon,2400,avril-octobre
+PORNICHET,Gazon,1000,avril-octobre
+PORNICHET,Gazon,1200,avril-octobre
+PORNICHET,Gazon,1400,avril-octobre
+PORNICHET,Gazon,1600,avril-octobre
+PORNICHET,Gazon,1800,avril-octobre
+PORNICHET,Gazon,2000,avril-octobre
+PORNICHET,Gazon,2200,avril-octobre
+PORNICHET,Gazon,2400,avril-octobre
+CAGNES/MER,PSF,1200,decembre-mars
+CAGNES/MER,PSF,1400,decembre-mars
+CAGNES/MER,PSF,1600,decembre-mars
+CAGNES/MER,PSF,1800,decembre-mars
+CAGNES/MER,PSF,2000,decembre-mars
+CAGNES/MER,PSF,2200,decembre-mars
+CAGNES/MER,PSF,2400,decembre-mars
+PAU MIDI,PSF,1200,novembre-fevrier
+PAU MIDI,PSF,1300,novembre-fevrier
+PAU MIDI,PSF,1400,novembre-fevrier
+PAU MIDI,PSF,1500,novembre-fevrier
+PAU MIDI,PSF,1600,novembre-fevrier
+PAU MIDI,PSF,2000,novembre-fevrier
+PAU MIDI,PSF,2400,novembre-fevrier
+PAU MIDI,PSF,2600,novembre-fevrier
+MACHECOUL,Gazon,1000,avril-octobre
+MACHECOUL,Gazon,1200,avril-octobre
+MACHECOUL,Gazon,1400,avril-octobre
+MACHECOUL,Gazon,1600,avril-octobre
+MACHECOUL,Gazon,1800,avril-octobre
+MACHECOUL,Gazon,2000,avril-octobre
+MACHECOUL,Gazon,2200,avril-octobre
+MACHECOUL,Gazon,2400,avril-octobre
+SENONNES POUANCE,Gazon,1000,avril-octobre
+SENONNES POUANCE,Gazon,1200,avril-octobre
+SENONNES POUANCE,Gazon,1400,avril-octobre
+SENONNES POUANCE,Gazon,1600,avril-octobre
+SENONNES POUANCE,Gazon,1800,avril-octobre
+SENONNES POUANCE,Gazon,2000,avril-octobre
+SENONNES POUANCE,Gazon,2200,avril-octobre
+SENONNES POUANCE,Gazon,2400,avril-octobre
+EVREUX,Gazon,1000,avril-octobre
+EVREUX,Gazon,1200,avril-octobre
+EVREUX,Gazon,1400,avril-octobre
+EVREUX,Gazon,1600,avril-octobre
+EVREUX,Gazon,1800,avril-octobre
+EVREUX,Gazon,2000,avril-octobre
+EVREUX,Gazon,2200,avril-octobre
+EVREUX,Gazon,2400,avril-octobre
+CHATILLON/CHALARONNE,Gazon,1000,avril-octobre
+CHATILLON/CHALARONNE,Gazon,1200,avril-octobre
+CHATILLON/CHALARONNE,Gazon,1400,avril-octobre
+CHATILLON/CHALARONNE,Gazon,1600,avril-octobre
+CHATILLON/CHALARONNE,Gazon,1800,avril-octobre
+CHATILLON/CHALARONNE,Gazon,2000,avril-octobre
+CHATILLON/CHALARONNE,Gazon,2200,avril-octobre
+CHATILLON/CHALARONNE,Gazon,2400,avril-octobre
+CHATEAUBRIANT,Gazon,1000,avril-octobre
+CHATEAUBRIANT,Gazon,1200,avril-octobre
+CHATEAUBRIANT,Gazon,1400,avril-octobre
+CHATEAUBRIANT,Gazon,1600,avril-octobre
+CHATEAUBRIANT,Gazon,1800,avril-octobre
+CHATEAUBRIANT,Gazon,2000,avril-octobre
+CHATEAUBRIANT,Gazon,2200,avril-octobre
+CHATEAUBRIANT,Gazon,2400,avril-octobre
+DIEPPE,Gazon,1000,avril-octobre
+DIEPPE,Gazon,1200,avril-octobre
+DIEPPE,Gazon,1400,avril-octobre
+DIEPPE,Gazon,1600,avril-octobre
+DIEPPE,Gazon,1800,avril-octobre
+DIEPPE,Gazon,2000,avril-octobre
+DIEPPE,Gazon,2200,avril-octobre
+DIEPPE,Gazon,2400,avril-octobre
+CHOLET,Gazon,1000,avril-octobre
+CHOLET,Gazon,1200,avril-octobre
+CHOLET,Gazon,1400,avril-octobre
+CHOLET,Gazon,1600,avril-octobre
+CHOLET,Gazon,1800,avril-octobre
+CHOLET,Gazon,2000,avril-octobre
+CHOLET,Gazon,2200,avril-octobre
+CHOLET,Gazon,2400,avril-octobre
+DIEPPE MIDI,Gazon,1000,avril-octobre
+DIEPPE MIDI,Gazon,1200,avril-octobre
+DIEPPE MIDI,Gazon,1400,avril-octobre
+DIEPPE MIDI,Gazon,1600,avril-octobre
+DIEPPE MIDI,Gazon,1800,avril-octobre
+DIEPPE MIDI,Gazon,2000,avril-octobre
+DIEPPE MIDI,Gazon,2200,avril-octobre
+DIEPPE MIDI,Gazon,2400,avril-octobre
+AIX LES BAINS,Gazon,1000,avril-octobre
+AIX LES BAINS,Gazon,1200,avril-octobre
+AIX LES BAINS,Gazon,1400,avril-octobre
+AIX LES BAINS,Gazon,1600,avril-octobre
+AIX LES BAINS,Gazon,1800,avril-octobre
+AIX LES BAINS,Gazon,2000,avril-octobre
+AIX LES BAINS,Gazon,2200,avril-octobre
+AIX LES BAINS,Gazon,2400,avril-octobre
+VITTEL,Gazon,1000,avril-octobre
+VITTEL,Gazon,1200,avril-octobre
+VITTEL,Gazon,1400,avril-octobre
+VITTEL,Gazon,1600,avril-octobre
+VITTEL,Gazon,1800,avril-octobre
+VITTEL,Gazon,2000,avril-octobre
+VITTEL,Gazon,2200,avril-octobre
+VITTEL,Gazon,2400,avril-octobre
+SAINT MALO,Gazon,1000,avril-octobre
+SAINT MALO,Gazon,1200,avril-octobre
+SAINT MALO,Gazon,1400,avril-octobre
+SAINT MALO,Gazon,1600,avril-octobre
+SAINT MALO,Gazon,1800,avril-octobre
+SAINT MALO,Gazon,2000,avril-octobre
+SAINT MALO,Gazon,2200,avril-octobre
+SAINT MALO,Gazon,2400,avril-octobre
+LE TOUQUET,Gazon,1000,avril-octobre
+LE TOUQUET,Gazon,1200,avril-octobre
+LE TOUQUET,Gazon,1400,avril-octobre
+LE TOUQUET,Gazon,1600,avril-octobre
+LE TOUQUET,Gazon,1800,avril-octobre
+LE TOUQUET,Gazon,2000,avril-octobre
+LE TOUQUET,Gazon,2200,avril-octobre
+LE TOUQUET,Gazon,2400,avril-octobre
+SAN SEBASTIAN,Gazon,1000,juin-septembre
+SAN SEBASTIAN,Gazon,1100,juin-septembre
+SAN SEBASTIAN,Gazon,1200,juin-septembre
+SAN SEBASTIAN,Gazon,1400,juin-septembre
+SAN SEBASTIAN,Gazon,1600,juin-septembre
+SAN SEBASTIAN,Gazon,1700,juin-septembre
+SAN SEBASTIAN,Gazon,1800,juin-septembre
+SAN SEBASTIAN,Gazon,1900,juin-septembre
+SAN SEBASTIAN,Gazon,2000,juin-septembre
+SAN SEBASTIAN,Gazon,2100,juin-septembre
+SAN SEBASTIAN,Gazon,2200,juin-septembre
+SAN SEBASTIAN,Gazon,2400,juin-septembre
+SAN SEBASTIAN,Gazon,2500,juin-septembre
+SAN SEBASTIAN,Gazon,2800,juin-septembre
+AVENCHES,Gazon,800,mars-octobre
+AVENCHES,Gazon,900,mars-octobre
+AVENCHES,Gazon,1200,mars-octobre
+AVENCHES,Gazon,1300,mars-octobre
+AVENCHES,Gazon,1400,mars-octobre
+AVENCHES,Gazon,1500,mars-octobre
+AVENCHES,Gazon,1600,mars-octobre
+AVENCHES,Gazon,2000,mars-octobre
+AVENCHES,Gazon,2100,mars-octobre
+AVENCHES,Gazon,2150,mars-octobre
+AVENCHES,Gazon,2200,mars-octobre
+AVENCHES,Gazon,2400,mars-octobre
+AVENCHES,Gazon,2700,mars-octobre
+AVENCHES,Gazon,2800,mars-octobre
+AVENCHES,Gazon,2900,mars-octobre
+AVENCHES,Gazon,3000,mars-octobre
+MONS (GHLIN),PSF,950,avril-octobre
+MONS (GHLIN),PSF,1500,avril-octobre
+MONS (GHLIN),PSF,2100,avril-octobre
+MONS (GHLIN),PSF,2300,avril-octobre
+MONS (GHLIN),PSF,2850,avril-octobre
+MONS (GHLIN),PSF,3200,avril-octobre
+MONS (GHLIN),PSF,4000,avril-octobre
+OSTENDE,Gazon,100,juillet-aout
+OSTENDE,Gazon,1200,juillet-aout
+OSTENDE,Gazon,1600,juillet-aout
+OSTENDE,Gazon,1800,juillet-aout
+OSTENDE,Gazon,2100,juillet-aout
+OSTENDE,Gazon,2200,juillet-aout
+OSTENDE,Gazon,2400,juillet-aout
+OSTENDE,Gazon,2700,juillet-aout
+OSTENDE,Gazon,3200,juillet-aout
+OSTENDE,Gazon,4000,juillet-aout
+WAREGEM,Gazon,1600,mai-septembre
+WAREGEM,Gazon,2200,mai-septembre
+WAREGEM,Gazon,2700,mai-septembre
+WAREGEM,Gazon,4000,mai-septembre
