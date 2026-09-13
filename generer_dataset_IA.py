@@ -323,21 +323,65 @@ def preparer_colonnes(df):
 # FILTRAGE HIPPODROMES
 # ============================================================
 
+def _normaliser_nom_fichier(nom):
+    """Normalise un nom de fichier pour la comparaison : insensible aux
+    accents, espaces, underscores, tirets et à la casse. Ça évite les
+    échecs de type 'ça marchait sous Windows mais pas sur Streamlit
+    Cloud (Linux, sensible à la casse et aux espaces exacts)'."""
+    s = norm(Path(nom).stem)  # enlève l'extension, gère déjà les accents
+    return re.sub(r"[^A-Z0-9]", "", s)
+
+
+def trouver_fichier_local(nom_attendu, dossier, extensions=None):
+    """
+    Cherche un fichier dans `dossier` dont le nom correspond à
+    `nom_attendu`, en tolérant les différences d'accents, d'espaces,
+    d'underscores/tirets et de casse (ex: 'Hippodromes francais et
+    etrangers.xlsx' retrouve aussi 'Hippodromes_francais_et_etrangers.XLSX').
+    Retourne le premier Path trouvé, ou None.
+    """
+    cible = _normaliser_nom_fichier(nom_attendu)
+    if extensions is None:
+        extensions = [Path(nom_attendu).suffix]
+
+    if not dossier.exists():
+        return None
+
+    for f in dossier.iterdir():
+        if not f.is_file():
+            continue
+        if extensions and f.suffix.lower() not in [e.lower() for e in extensions]:
+            continue
+        if _normaliser_nom_fichier(f.name) == cible:
+            return f
+
+    return None
+
+
 def charger_listes_hippodromes():
     """
     Charge le référentiel Excel réel : deux colonnes séparées
     'Hippodromes français' et 'Hippodromes étrangers' (pas de colonne
     'Canonique'/'Pays' — ce schéma n'existe pas dans le fichier fourni).
     """
-    candidates = [FICHIER_HIPPODROMES, FICHIER_HIPPODROMES_LOCALE]
-    path = next((p for p in candidates if p.exists()), None)
+    candidates = [
+        FICHIER_HIPPODROMES,
+        FICHIER_HIPPODROMES_LOCALE,
+        trouver_fichier_local(
+            "Hippodromes francais et etrangers.xlsx",
+            Path(__file__).parent,
+            extensions=[".xlsx", ".xls"],
+        ),
+    ]
+    path = next((p for p in candidates if p is not None and p.exists()), None)
 
     if path is None:
         raise FileNotFoundError(
             "\nFichier des hippodromes introuvable.\n"
-            "Placez 'Hippodromes francais et etrangers.xlsx' dans :\n"
+            "Placez un fichier Excel des hippodromes (2 colonnes : "
+            "'Hippodromes français' / 'Hippodromes étrangers') dans :\n"
             f"  {FICHIER_HIPPODROMES}\n"
-            "ou dans le même dossier que le script.\n"
+            "ou dans le même dossier que ce script.\n"
         )
 
     xls = pd.read_excel(path, dtype=str)
@@ -432,8 +476,14 @@ def normaliser_surface(x):
 
 
 def charger_reference_surfaces():
-    candidates = [FICHIER_REFERENCE_SURFACES, REFERENCE_LOCALE]
-    path = next((p for p in candidates if p.exists()), None)
+    candidates = [
+        FICHIER_REFERENCE_SURFACES,
+        REFERENCE_LOCALE,
+        trouver_fichier_local(
+            "hippodromes_galop_complet.csv", Path(__file__).parent, extensions=[".csv"]
+        ),
+    ]
+    path = next((p for p in candidates if p is not None and p.exists()), None)
 
     if path is None:
         raise FileNotFoundError(
