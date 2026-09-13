@@ -254,6 +254,16 @@ def preparer_X(df, features, colonnes_categorielles, categories_par_colonne):
     return df[features]
 
 
+def formater_num_pmu(valeur):
+    """Affiche le numéro PMU proprement (gère '1', '1.0', NaN, texte...)."""
+    if pd.isna(valeur) or str(valeur).strip() in ("", "nan", "None"):
+        return "?"
+    try:
+        return str(int(float(valeur)))
+    except (ValueError, TypeError):
+        return str(valeur).strip()
+
+
 def predire(modele, df, features, colonnes_categorielles, categories_par_colonne):
     X = preparer_X(df, features, colonnes_categorielles, categories_par_colonne)
     df = df.copy()
@@ -429,8 +439,9 @@ def main():
                 with st.expander(f"Course {c} ({len(df_c)} partants)", expanded=False):
                     medailles = ["🥇", "🥈", "🥉"]
                     for rang, (_, row) in enumerate(df_c.head(3).iterrows()):
+                        num_pmu = formater_num_pmu(row.get("Num_PMU"))
                         st.markdown(
-                            f"{medailles[rang]} **{row['Cheval']}** "
+                            f"{medailles[rang]} N°{num_pmu} **{row['Cheval']}** "
                             f"({row['Proba_Podium']*100:.0f}%)"
                         )
 
