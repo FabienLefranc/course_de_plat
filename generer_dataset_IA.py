@@ -690,18 +690,26 @@ def add_history_features(df):
         "Entraineur_Courses_Avant", "Entraineur_Victoires_Avant", "Entraineur_Taux_Victoire_Avant",
         "Cheval_Surface_Courses_Avant", "Cheval_Surface_Victoires_Avant", "Cheval_Surface_Taux_Victoire_Avant",
         "Cheval_Distance_Courses_Avant", "Cheval_Distance_Victoires_Avant", "Cheval_Distance_Taux_Victoire_Avant",
+        "Cheval_Distance_Podiums_Avant", "Cheval_Distance_Taux_Podium_Avant",
         "Couplage_Courses_Avant", "Couplage_Victoires_Avant", "Couplage_Taux_Victoire_Avant",
+        "Couplage_Podiums_Avant", "Couplage_Taux_Podium_Avant",
+        "Cheval_Hippodrome_Courses_Avant", "Cheval_Hippodrome_Victoires_Avant",
+        "Cheval_Hippodrome_Podiums_Avant", "Cheval_Hippodrome_Taux_Victoire_Avant",
+        "Cheval_Hippodrome_Taux_Podium_Avant",
     ]
 
     for c in feature_cols:
         df[c] = np.nan
 
+    hippodrome_col = "Hippodrome_Canonique" if "Hippodrome_Canonique" in df.columns else "Hippodrome_Norm"
+
     horse_hist = defaultdict(lambda: [0, 0, 0])
     jockey_hist = defaultdict(lambda: [0, 0])
     trainer_hist = defaultdict(lambda: [0, 0])
     horse_surface_hist = defaultdict(lambda: [0, 0])
-    horse_distance_hist = defaultdict(lambda: [0, 0])
-    coupling_hist = defaultdict(lambda: [0, 0])
+    horse_distance_hist = defaultdict(lambda: [0, 0, 0])       # [courses, victoires, podiums]
+    coupling_hist = defaultdict(lambda: [0, 0, 0])             # [courses, victoires, podiums]
+    horse_hippodrome_hist = defaultdict(lambda: [0, 0, 0])     # [courses, victoires, podiums]
 
     groups = df.groupby("Course_ID", sort=False).groups
     total_courses = len(groups)
@@ -718,6 +726,7 @@ def add_history_features(df):
             trainer = df.at[idx, "Entraineur_Norm"]
             surface = df.at[idx, "Surface_Final"]
             distance = df.at[idx, "Distance"]
+            hippodrome = df.at[idx, hippodrome_col]
 
             h = horse_hist[horse]
             j = jockey_hist[jockey]
@@ -731,6 +740,7 @@ def add_history_features(df):
             hd = horse_distance_hist[hd_key]
 
             cp = coupling_hist[(horse, jockey)]
+            hh = horse_hippodrome_hist[(horse, hippodrome)]
 
             if h[0] > 0:
                 df.at[idx, "Cheval_Courses_Avant"] = h[0]
@@ -758,11 +768,22 @@ def add_history_features(df):
                 df.at[idx, "Cheval_Distance_Courses_Avant"] = hd[0]
                 df.at[idx, "Cheval_Distance_Victoires_Avant"] = hd[1]
                 df.at[idx, "Cheval_Distance_Taux_Victoire_Avant"] = hd[1] / hd[0]
+                df.at[idx, "Cheval_Distance_Podiums_Avant"] = hd[2]
+                df.at[idx, "Cheval_Distance_Taux_Podium_Avant"] = hd[2] / hd[0]
 
             if cp[0] > 0:
                 df.at[idx, "Couplage_Courses_Avant"] = cp[0]
                 df.at[idx, "Couplage_Victoires_Avant"] = cp[1]
                 df.at[idx, "Couplage_Taux_Victoire_Avant"] = cp[1] / cp[0]
+                df.at[idx, "Couplage_Podiums_Avant"] = cp[2]
+                df.at[idx, "Couplage_Taux_Podium_Avant"] = cp[2] / cp[0]
+
+            if hh[0] > 0:
+                df.at[idx, "Cheval_Hippodrome_Courses_Avant"] = hh[0]
+                df.at[idx, "Cheval_Hippodrome_Victoires_Avant"] = hh[1]
+                df.at[idx, "Cheval_Hippodrome_Podiums_Avant"] = hh[2]
+                df.at[idx, "Cheval_Hippodrome_Taux_Victoire_Avant"] = hh[1] / hh[0]
+                df.at[idx, "Cheval_Hippodrome_Taux_Podium_Avant"] = hh[2] / hh[0]
 
         # PHASE 2 : mise à jour APRÈS
         for idx in idxs:
@@ -775,6 +796,7 @@ def add_history_features(df):
             trainer = df.at[idx, "Entraineur_Norm"]
             surface = df.at[idx, "Surface_Final"]
             distance = df.at[idx, "Distance"]
+            hippodrome = df.at[idx, hippodrome_col]
 
             is_win = rank == 1
             is_podium = rank <= 3
@@ -802,10 +824,20 @@ def add_history_features(df):
                 horse_distance_hist[hd_key][0] += 1
                 if is_win:
                     horse_distance_hist[hd_key][1] += 1
+                if is_podium:
+                    horse_distance_hist[hd_key][2] += 1
 
             coupling_hist[(horse, jockey)][0] += 1
             if is_win:
                 coupling_hist[(horse, jockey)][1] += 1
+            if is_podium:
+                coupling_hist[(horse, jockey)][2] += 1
+
+            horse_hippodrome_hist[(horse, hippodrome)][0] += 1
+            if is_win:
+                horse_hippodrome_hist[(horse, hippodrome)][1] += 1
+            if is_podium:
+                horse_hippodrome_hist[(horse, hippodrome)][2] += 1
 
     return df
 
@@ -876,6 +908,57 @@ def add_recent_form_features(df):
                 jockey_results[jockey] = jockey_results[jockey][-5:]
             if len(trainer_results[trainer]) > 10:
                 trainer_results[trainer] = trainer_results[trainer][-5:]
+
+    return df
+
+
+def add_jockey_continuite_features(df):
+    """
+    Pour chaque cheval, regarde ses 3 dernières courses CONNUES (avant
+    la course en cours) et compte combien ont été faites avec le MEME
+    jockey que celui annoncé aujourd'hui, et combien de ces courses-là
+    ont été placées (top 3). Répond à : "ce couple cheval/jockey
+    tourne-t-il régulièrement en ce moment, et ça marche ?"
+    """
+    df = df.copy()
+
+    feature_cols = [
+        "Meme_Jockey_Nb_Recentes", "Meme_Jockey_Nb_Recentes_Places",
+        "Nb_Dernieres_Courses_Analysees",
+    ]
+    for c in feature_cols:
+        df[c] = np.nan
+
+    horse_recent = defaultdict(list)  # liste de (jockey, rang), plus récent en dernier
+
+    groups = df.groupby("Course_ID", sort=False).groups
+
+    for _, idxs in groups.items():
+        for idx in idxs:
+            horse = df.at[idx, "Cheval_Norm"]
+            jockey_du_jour = df.at[idx, "Jockey_Norm"]
+            hist = horse_recent[horse][-3:]
+
+            if hist:
+                nb_meme_jockey = sum(1 for jk, rk in hist if jk == jockey_du_jour)
+                nb_meme_jockey_places = sum(
+                    1 for jk, rk in hist if jk == jockey_du_jour and rk <= 3
+                )
+                df.at[idx, "Meme_Jockey_Nb_Recentes"] = nb_meme_jockey
+                df.at[idx, "Meme_Jockey_Nb_Recentes_Places"] = nb_meme_jockey_places
+                df.at[idx, "Nb_Dernieres_Courses_Analysees"] = len(hist)
+
+        for idx in idxs:
+            rank = df.at[idx, "Classement"]
+            if pd.isna(rank):
+                continue
+
+            horse = df.at[idx, "Cheval_Norm"]
+            jockey = df.at[idx, "Jockey_Norm"]
+
+            horse_recent[horse].append((jockey, rank))
+            if len(horse_recent[horse]) > 5:
+                horse_recent[horse] = horse_recent[horse][-5:]
 
     return df
 

@@ -73,6 +73,7 @@ from generer_dataset_IA import (
     add_history_features,
     add_recent_form_features,
     add_context_features,
+    add_jockey_continuite_features,
     charger_listes_hippodromes,
     normaliser_hippodrome,
 )
@@ -212,6 +213,7 @@ def calculer_features_jour(_hist, jour):
 
     total = add_history_features(total)
     total = add_recent_form_features(total)
+    total = add_jockey_continuite_features(total)
     total = add_context_features(total)
     total = enrichir_features_supplementaires(total)
 
@@ -275,64 +277,178 @@ def predire(modele, df, features, colonnes_categorielles, categories_par_colonne
 # ANALYSE NARRATIVE (factuelle : compare le cheval au reste du peloton)
 # ============================================================
 
-def expliquer_cheval(row, df_course):
-    forces, vigilances = [], []
+def _joindre(clauses):
+    """Joint une liste de fragments de phrase avec des virgules et un
+    'et' avant le dernier, pour une lecture naturelle."""
+    clauses = [c for c in clauses if c]
+    if not clauses:
+        return ""
+    if len(clauses) == 1:
+        return clauses[0]
+    return ", ".join(clauses[:-1]) + " et " + clauses[-1]
 
-    taux_podium = row.get("Cheval_Taux_Podium_Avant")
-    nb_courses_avant = row.get("Cheval_Courses_Avant")
-    if pd.notna(taux_podium) and pd.notna(nb_courses_avant) and nb_courses_avant >= 3:
-        if taux_podium >= 0.35:
-            forces.append(
-                f"🏆 Taux de podium de **{taux_podium*100:.0f}%** sur ses "
-                f"{int(nb_courses_avant)} dernières courses connues."
+
+def construire_recit(row, df_course):
+    """
+    Construit un commentaire en langage naturel qui COMBINE les
+    differents signaux (distance, jockey, hippodrome, forme, poids...)
+    plutot que de les lister separement.
+    """
+    nom = row.get("Cheval", "Ce cheval")
+    pronom = "Elle" if str(row.get("Sexe", "")).strip().upper().startswith("F") else "Il"
+
+    clauses_contexte = []
+    clauses_globales = []
+    vigilances = []
+
+    # ---------- Distance ----------
+    nb_dist = row.get("Cheval_Distance_Courses_Avant")
+    distance_m = row.get("Distance")
+    distance_txt = f"{distance_m:.0f} m" if pd.notna(distance_m) else "cette distance"
+    if pd.notna(nb_dist) and nb_dist > 0:
+        victoires_dist = int(row.get("Cheval_Distance_Victoires_Avant") or 0)
+        podiums_dist = int(row.get("Cheval_Distance_Podiums_Avant") or 0)
+        places_dist = max(0, podiums_dist - victoires_dist)
+        taux_dist = podiums_dist / nb_dist
+        if taux_dist >= 0.35 or victoires_dist >= 1:
+            clauses_contexte.append(
+                f"court sur une distance qu'{'elle' if pronom=='Elle' else 'il'} semble apprecier "
+                f"({victoires_dist} victoire(s) et {places_dist} place(s) en {int(nb_dist)} sortie(s) a {distance_txt})"
             )
-        elif taux_podium <= 0.10:
+        elif nb_dist >= 3 and podiums_dist == 0:
             vigilances.append(
-                f"Taux de podium modeste : **{taux_podium*100:.0f}%** sur "
-                f"{int(nb_courses_avant)} courses."
+                f"n'a jamais ete place{'e' if pronom=='Elle' else ''} a {distance_txt} en {int(nb_dist)} sorties"
             )
-    elif pd.isna(nb_courses_avant) or nb_courses_avant == 0:
-        vigilances.append("Aucun historique connu dans la base (cheval inédit ou peu couru).")
+    else:
+        vigilances.append(f"aborde la distance de {distance_txt} pour la premiere fois")
 
-    forme = row.get("Cheval_Forme_3")
-    if pd.notna(forme):
-        if forme <= 3:
-            forces.append(f"📈 Bonne forme récente : classement moyen de **{forme:.1f}** sur ses 3 dernières courses.")
-        elif forme >= 7:
-            vigilances.append(f"Forme récente en retrait : classement moyen de **{forme:.1f}** sur ses 3 dernières courses.")
+    # ---------- Continuite recente avec CE jockey (3 dernieres courses) ----------
+    nb_meme_jockey_recent = row.get("Meme_Jockey_Nb_Recentes")
+    nb_courses_analysees = row.get("Nb_Dernieres_Courses_Analysees")
+    if pd.notna(nb_meme_jockey_recent) and pd.notna(nb_courses_analysees) and nb_courses_analysees > 0:
+        placements_recents = int(row.get("Meme_Jockey_Nb_Recentes_Places") or 0)
+        if nb_meme_jockey_recent >= 2:
+            if nb_meme_jockey_recent == nb_courses_analysees:
+                clauses_contexte.append(
+                    f"a fait ses {int(nb_courses_analysees)} dernieres courses avec le meme "
+                    f"jockey, place {placements_recents} fois"
+                )
+            else:
+                clauses_contexte.append(
+                    f"a couru {int(nb_meme_jockey_recent)} de ses {int(nb_courses_analysees)} "
+                    f"dernieres courses avec le meme jockey, place {placements_recents} fois"
+                )
 
-    musique_taux = row.get("Musique_Taux_Podium")
-    if pd.notna(musique_taux) and row.get("Musique_Nb_Perfs", 0) >= 3:
-        if musique_taux >= 0.5:
-            forces.append(f"🎵 Musique favorable : {musique_taux*100:.0f}% de places dans le top 3 récemment.")
+    # ---------- Historique complet avec CE jockey ----------
+    nb_couplage = row.get("Couplage_Courses_Avant")
+    if pd.notna(nb_couplage) and nb_couplage > 0 and (pd.isna(nb_meme_jockey_recent) or nb_meme_jockey_recent < 2):
+        victoires_couplage = int(row.get("Couplage_Victoires_Avant") or 0)
+        podiums_couplage = int(row.get("Couplage_Podiums_Avant") or 0)
+        places_couplage = max(0, podiums_couplage - victoires_couplage)
+        if podiums_couplage > 0:
+            clauses_contexte.append(
+                f"a deja couru {int(nb_couplage)} fois avec ce jockey par le passe "
+                f"(gagne {victoires_couplage} fois, place {places_couplage} fois)"
+            )
+        elif nb_couplage >= 3:
+            vigilances.append(f"n'a jamais ete place avec ce jockey en {int(nb_couplage)} sorties ensemble")
 
-    jockey_taux = row.get("Jockey_Taux_Victoire_Avant")
-    if pd.notna(jockey_taux) and jockey_taux >= 0.15:
-        forces.append(f"🏇 Jockey performant : **{jockey_taux*100:.0f}%** de victoires sur ses montes passées.")
+    # ---------- Hippodrome ----------
+    taux_podium = row.get("Cheval_Taux_Podium_Avant")
+    nb_hippo = row.get("Cheval_Hippodrome_Courses_Avant")
+    if pd.notna(nb_hippo) and nb_hippo >= 2:
+        podiums_hippo = int(row.get("Cheval_Hippodrome_Podiums_Avant") or 0)
+        taux_hippo = row.get("Cheval_Hippodrome_Taux_Podium_Avant")
+        if pd.notna(taux_podium) and taux_hippo is not None and taux_hippo >= taux_podium + 0.15:
+            clauses_contexte.append(
+                f"revient sur un hippodrome qu'{'elle' if pronom=='Elle' else 'il'} affectionne "
+                f"visiblement ({podiums_hippo} podium(s) en {int(nb_hippo)} course(s) ici, contre "
+                f"{taux_podium*100:.0f}% de podiums en moyenne partout ailleurs)"
+            )
+        elif pd.notna(taux_podium) and taux_hippo is not None and taux_hippo <= taux_podium - 0.15:
+            vigilances.append(
+                f"reussit moins bien sur cet hippodrome que sa moyenne habituelle "
+                f"({taux_hippo*100:.0f}% de podiums ici contre {taux_podium*100:.0f}% ailleurs)"
+            )
 
-    entraineur_taux = row.get("Entraineur_Taux_Victoire_Avant")
-    if pd.notna(entraineur_taux) and entraineur_taux >= 0.15:
-        forces.append(f"👤 Entraîneur en réussite : **{entraineur_taux*100:.0f}%** de victoires.")
-
-    gains_par_course = row.get("Gains_Par_Course")
-    if pd.notna(gains_par_course) and "Gains_Par_Course" in df_course.columns:
-        moyenne_peloton = df_course["Gains_Par_Course"].mean()
-        if pd.notna(moyenne_peloton) and moyenne_peloton > 0 and gains_par_course > moyenne_peloton * 1.5:
-            forces.append(f"💰 Gains par course nettement au-dessus de la moyenne du peloton.")
-
+    # ---------- Poids ----------
     poids = row.get("Poids_Num")
     if pd.notna(poids) and "Poids_Num" in df_course.columns:
         moyenne_poids = df_course["Poids_Num"].mean()
         ecart = poids - moyenne_poids
         if ecart <= -1.5:
-            forces.append(f"⚖️ Avantage au poids : {poids:.1f} kg ({ecart:+.1f} kg vs moyenne du peloton).")
+            clauses_contexte.append(
+                f"porte un poids inferieur de {abs(ecart):.1f} kg a la moyenne du peloton ({poids:.1f} kg)"
+            )
         elif ecart >= 1.5:
-            vigilances.append(f"Poids pénalisant : {poids:.1f} kg ({ecart:+.1f} kg vs moyenne du peloton).")
+            vigilances.append(f"porte un poids superieur de {ecart:.1f} kg a la moyenne du peloton")
+
+    supplement = row.get("Supplement_Num")
+    if pd.notna(supplement) and supplement > 0:
+        vigilances.append(f"court avec un supplement de +{supplement:.1f} kg")
+
+    # ---------- Forme et regularite globale ----------
+    if pd.notna(taux_podium) and row.get("Cheval_Courses_Avant", 0) >= 3:
+        nb_courses_avant = int(row.get("Cheval_Courses_Avant"))
+        if taux_podium >= 0.35:
+            clauses_globales.append(
+                f"affiche un taux de podium solide de {taux_podium*100:.0f}% sur ses "
+                f"{nb_courses_avant} dernieres courses connues"
+            )
+        elif taux_podium <= 0.10:
+            vigilances.append(f"n'a ete place que {taux_podium*100:.0f}% du temps sur ses {nb_courses_avant} dernieres courses")
+    elif row.get("Cheval_Courses_Avant", 0) == 0:
+        vigilances.append("n'a aucun historique connu dans la base (cheval inedit ou peu couru)")
+
+    forme = row.get("Cheval_Forme_3")
+    if pd.notna(forme):
+        rang_estime = 11 - forme
+        if forme >= 7:
+            clauses_globales.append(
+                f"traverse une bonne dynamique recente (classement moyen d'environ "
+                f"{rang_estime:.0f} sur ses 3 dernieres courses)"
+            )
+        elif forme <= 3:
+            vigilances.append(
+                f"connait un passage plus discret (classement moyen d'environ "
+                f"{rang_estime:.0f} sur ses 3 dernieres courses)"
+            )
+
+    musique_taux = row.get("Musique_Taux_Podium")
+    if pd.notna(musique_taux) and row.get("Musique_Nb_Perfs", 0) >= 3 and musique_taux >= 0.5:
+        clauses_globales.append(f"sa musique recente est favorable ({musique_taux*100:.0f}% de places)")
+
+    jockey_taux = row.get("Jockey_Taux_Victoire_Avant")
+    if pd.notna(jockey_taux) and jockey_taux >= 0.15:
+        clauses_globales.append(f"est confie a un jockey qui gagne {jockey_taux*100:.0f}% de ses courses")
+
+    entraineur_taux = row.get("Entraineur_Taux_Victoire_Avant")
+    if pd.notna(entraineur_taux) and entraineur_taux >= 0.15:
+        clauses_globales.append(f"est entraine par une ecurie en reussite ({entraineur_taux*100:.0f}% de victoires)")
+
+    gains_par_course = row.get("Gains_Par_Course")
+    if pd.notna(gains_par_course) and "Gains_Par_Course" in df_course.columns:
+        moyenne_gains = df_course["Gains_Par_Course"].mean()
+        if pd.notna(moyenne_gains) and moyenne_gains > 0 and gains_par_course > moyenne_gains * 1.5:
+            clauses_globales.append("ses gains par course sont nettement au-dessus de la moyenne du peloton")
 
     if row.get("Inedit_Flag") == 1:
-        vigilances.append("Cheval sans course connue dans la base (Inédit).")
+        vigilances.append("n'a aucune course connue dans la base (Inedit)")
 
-    return forces, vigilances
+    # ---------- Assemblage du recit ----------
+    phrases = []
+    if clauses_contexte:
+        phrases.append(f"{nom} " + _joindre(clauses_contexte) + ".")
+    if clauses_globales:
+        phrases.append(f"{pronom} " + _joindre(clauses_globales) + ".")
+    if not phrases:
+        phrases.append(f"Peu de signaux disponibles sur {nom} pour cette course.")
+    if vigilances:
+        phrases.append("A surveiller : " + _joindre(vigilances) + ".")
+
+    return " ".join(phrases)
+
+
 
 
 # ============================================================
@@ -486,23 +602,8 @@ def main():
             c2.metric("Jockey", str(row.get("Jockey", "N/A")))
             c3.metric("Corde", str(row.get("Place_Corde_Num", "N/A")))
 
-            forces, vigilances = expliquer_cheval(row, df_course)
-
-            col_f, col_v = st.columns(2)
-            with col_f:
-                st.markdown("**🟢 Points forts détectés**")
-                if forces:
-                    for f in forces:
-                        st.markdown(f"- {f}")
-                else:
-                    st.markdown("- Rien de particulièrement saillant.")
-            with col_v:
-                st.markdown("**🟠 Points de vigilance**")
-                if vigilances:
-                    for v in vigilances:
-                        st.markdown(f"- {v}")
-                else:
-                    st.markdown("- Aucun signal négatif détecté.")
+            st.markdown("**🔎 Pourquoi ce cheval ?**")
+            st.markdown(construire_recit(row, df_course))
 
     st.markdown("---")
     st.caption(
