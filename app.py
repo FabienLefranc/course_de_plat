@@ -524,7 +524,7 @@ def formater_jumele_reduit(df_c):
 
 
 def main():
-    st.title("🏇 Galop Analyzer")
+    st.title("🏇 Course de plat")
     st.markdown(
         "### 🤖 Prédictions IA (XGBoost) du TOP 3 — **sans utiliser la cote PMU**"
     )
