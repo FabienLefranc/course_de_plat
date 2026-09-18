@@ -61,7 +61,7 @@ URL_CSV_JOUR = (
 )
 TIMEOUT = 45
 
-st.set_page_config(page_title="🏇 Galop Analyzer", layout="wide", page_icon="🏇")
+st.set_page_config(page_title="🏇 Course de Plat", layout="wide", page_icon="🏇")
 
 # ============================================================
 # IMPORT DE LA LOGIQUE DEJA VALIDEE (pas de réécriture ici)
@@ -482,6 +482,47 @@ def charger_predictions_du_jour():
 # INTERFACE STREAMLIT
 # ============================================================
 
+def afficher_top3_medailles(df_c):
+    medailles = ["🥇", "🥈", "🥉"]
+    for rang, (_, row) in enumerate(df_c.head(3).iterrows()):
+        num_pmu = formater_num_pmu(row.get("Num_PMU"))
+        st.markdown(
+            f"{medailles[rang]} N°{num_pmu} **{row['Cheval']}** "
+            f"({row['Proba_Podium']*100:.0f}%)"
+        )
+
+
+def formater_jumele_reduit(df_c):
+    """
+    Combinaison 'Jumelé placé en champ réduit' pour les courses de 10 à
+    14 partants : 3 lignes de 4 combinaisons chacune (12 combinaisons
+    au total, 1€ la combinaison = 12€ de mise totale), construites à
+    partir du classement de probabilité du modèle (Top1 à Top6).
+    """
+    df_c = df_c.sort_values("Proba_Podium", ascending=False).reset_index(drop=True)
+    if len(df_c) < 6:
+        return None
+
+    tops = {}
+    for i in range(6):
+        row = df_c.iloc[i]
+        tops[i + 1] = f"N°{formater_num_pmu(row.get('Num_PMU'))} {row['Cheval']}"
+
+    lignes = [
+        (1, [3, 4, 5, 6]),
+        (1, [2, 4, 5, 6]),
+        (2, [3, 4, 5, 6]),
+    ]
+
+    texte = ["**🎫 Jumelé placé (champ réduit)**"]
+    for banquier, partenaires in lignes:
+        partenaires_txt = " - ".join(tops[p] for p in partenaires)
+        texte.append(f"- {tops[banquier]} / {partenaires_txt}")
+    texte.append("*Total : 12 combinaisons à 1 € = 12 €*")
+
+    return "\n\n".join(texte)
+
+
 def main():
     st.title("🏇 Galop Analyzer")
     st.markdown(
@@ -552,14 +593,16 @@ def main():
             st.markdown(f"**{r}** — {df_r['Hippodrome_Canonique'].iloc[0]}")
             for c in sorted(df_r["Numero_Course"].unique(), key=lambda x: (len(str(x)), str(x))):
                 df_c = df_r[df_r["Numero_Course"] == c].sort_values("Proba_Podium", ascending=False)
-                with st.expander(f"Course {c} ({len(df_c)} partants)", expanded=False):
-                    medailles = ["🥇", "🥈", "🥉"]
-                    for rang, (_, row) in enumerate(df_c.head(3).iterrows()):
-                        num_pmu = formater_num_pmu(row.get("Num_PMU"))
-                        st.markdown(
-                            f"{medailles[rang]} N°{num_pmu} **{row['Cheval']}** "
-                            f"({row['Proba_Podium']*100:.0f}%)"
-                        )
+                nb_partants_c = len(df_c)
+                with st.expander(f"Course {c} ({nb_partants_c} partants)", expanded=False):
+                    if 10 <= nb_partants_c <= 14:
+                        bloc = formater_jumele_reduit(df_c)
+                        if bloc:
+                            st.markdown(bloc)
+                        else:
+                            afficher_top3_medailles(df_c)
+                    else:
+                        afficher_top3_medailles(df_c)
 
     # ============================================================
     # AFFICHAGE DE LA COURSE SELECTIONNEE
@@ -573,7 +616,11 @@ def main():
     st.subheader(f"📍 {reunion_choisie} — Course {course_choisie} | {hippodrome_actuel}")
     st.caption(f"{len(df_course)} partants — Distance : {df_course['Distance'].iloc[0]:.0f} m")
 
+    df_course = df_course.copy()
+    df_course["Num_PMU_Fmt"] = df_course.get("Num_PMU", pd.Series(dtype=object)).apply(formater_num_pmu)
+
     colonnes_affichage = {
+        "Num_PMU_Fmt": "N° PMU",
         "Cheval": "Cheval",
         "Jockey": "Jockey",
         "Poids_Num": "Poids (kg)",
