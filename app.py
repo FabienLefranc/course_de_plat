@@ -61,7 +61,7 @@ URL_CSV_JOUR = (
 )
 TIMEOUT = 45
 
-st.set_page_config(page_title="🏇 Course de Plat", layout="wide", page_icon="🏇")
+st.set_page_config(page_title="🏇 Galop Analyzer", layout="wide", page_icon="🏇")
 
 # ============================================================
 # IMPORT DE LA LOGIQUE DEJA VALIDEE (pas de réécriture ici)
@@ -524,7 +524,7 @@ def formater_jumele_reduit(df_c):
 
 
 def main():
-    st.title("🏇 Course de plat")
+    st.title("🏇 Galop Analyzer")
     st.markdown(
         "### 🤖 Prédictions IA (XGBoost) du TOP 3 — **sans utiliser la cote PMU**"
     )
@@ -595,14 +595,7 @@ def main():
                 df_c = df_r[df_r["Numero_Course"] == c].sort_values("Proba_Podium", ascending=False)
                 nb_partants_c = len(df_c)
                 with st.expander(f"Course {c} ({nb_partants_c} partants)", expanded=False):
-                    if 10 <= nb_partants_c <= 14:
-                        bloc = formater_jumele_reduit(df_c)
-                        if bloc:
-                            st.markdown(bloc)
-                        else:
-                            afficher_top3_medailles(df_c)
-                    else:
-                        afficher_top3_medailles(df_c)
+                    afficher_top3_medailles(df_c)
 
     # ============================================================
     # AFFICHAGE DE LA COURSE SELECTIONNEE
