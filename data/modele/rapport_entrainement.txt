@@ -1,18 +1,18 @@
 === VALIDATION ===
-auc: 0.6982691763300055
-log_loss: 0.6562460660934448
-nb_courses: 651
-precision_at_3_moyenne: 0.47414234511008696
-taux_au_moins_1_bon: 0.8771121351766513
-taux_au_moins_2_bons: 0.46697388632872505
-taux_3_sur_3: 0.07834101382488479
+auc: 0.6960482696762877
+log_loss: 0.663800060749054
+nb_courses: 664
+precision_at_3_moyenne: 0.4688755020080321
+taux_au_moins_1_bon: 0.875
+taux_au_moins_2_bons: 0.463855421686747
+taux_3_sur_3: 0.0677710843373494
 
 === TEST (courses les plus récentes) ===
-auc: 0.6859832797787849
-log_loss: 0.6851284503936768
-nb_courses: 651
-precision_at_3_moyenne: 0.4618535586277521
-taux_au_moins_1_bon: 0.8571428571428571
-taux_au_moins_2_bons: 0.45468509984639016
-taux_3_sur_3: 0.07373271889400922
+auc: 0.685278162511542
+log_loss: 0.6795699000358582
+nb_courses: 664
+precision_at_3_moyenne: 0.4583333333333333
+taux_au_moins_1_bon: 0.858433734939759
+taux_au_moins_2_bons: 0.4322289156626506
+taux_3_sur_3: 0.08433734939759036
 
