@@ -482,14 +482,12 @@ def charger_predictions_du_jour():
 # INTERFACE STREAMLIT
 # ============================================================
 
-def afficher_top3_medailles(df_c):
+def afficher_top3_medailles(df_c, vert=False):
     medailles = ["🥇", "🥈", "🥉"]
     for rang, (_, row) in enumerate(df_c.head(3).iterrows()):
         num_pmu = formater_num_pmu(row.get("Num_PMU"))
-        st.markdown(
-            f"{medailles[rang]} N°{num_pmu} **{row['Cheval']}** "
-            f"({row['Proba_Podium']*100:.0f}%)"
-        )
+        texte = f"{medailles[rang]} N°{num_pmu} **{row['Cheval']}** ({row['Proba_Podium']*100:.0f}%)"
+        st.markdown(f":green[{texte}]" if vert else texte)
 
 
 def formater_jumele_reduit(df_c):
@@ -594,8 +592,10 @@ def main():
             for c in sorted(df_r["Numero_Course"].unique(), key=lambda x: (len(str(x)), str(x))):
                 df_c = df_r[df_r["Numero_Course"] == c].sort_values("Proba_Podium", ascending=False)
                 nb_partants_c = len(df_c)
-                with st.expander(f"Course {c} ({nb_partants_c} partants)", expanded=False):
-                    afficher_top3_medailles(df_c)
+                est_10_14 = 10 <= nb_partants_c <= 14
+                titre = f"{'🟢 ' if est_10_14 else ''}Course {c} ({nb_partants_c} partants)"
+                with st.expander(titre, expanded=False):
+                    afficher_top3_medailles(df_c, vert=est_10_14)
 
     # ============================================================
     # AFFICHAGE DE LA COURSE SELECTIONNEE
