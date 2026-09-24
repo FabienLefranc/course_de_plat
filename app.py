@@ -493,29 +493,29 @@ def afficher_top3_medailles(df_c, vert=False):
 def formater_jumele_reduit(df_c):
     """
     Combinaison 'Jumelé placé en champ réduit' pour les courses de 10 à
-    14 partants : 3 lignes de 4 combinaisons chacune (12 combinaisons
-    au total, 1€ la combinaison = 12€ de mise totale), construites à
-    partir du classement de probabilité du modèle (Top1 à Top6).
+    14 partants : 3 lignes (6 + 4 + 2 = 12 combinaisons à 1€ = 12€),
+    construites à partir du classement de probabilité du modèle
+    (Top1 à Top7).
     """
     df_c = df_c.sort_values("Proba_Podium", ascending=False).reset_index(drop=True)
-    if len(df_c) < 6:
+    if len(df_c) < 7:
         return None
 
     tops = {}
-    for i in range(6):
+    for i in range(7):
         row = df_c.iloc[i]
         tops[i + 1] = f"N°{formater_num_pmu(row.get('Num_PMU'))} {row['Cheval']}"
 
     lignes = [
-        (1, [3, 4, 5, 6]),
-        (1, [2, 4, 5, 6]),
-        (2, [3, 4, 5, 6]),
+        (1, [2, 3, 4, 5, 6, 7], 6),
+        (2, [3, 4, 5, 6], 4),
+        (3, [4, 5], 2),
     ]
 
     texte = ["**🎫 Jumelé placé (champ réduit)**"]
-    for banquier, partenaires in lignes:
+    for banquier, partenaires, mise in lignes:
         partenaires_txt = " - ".join(tops[p] for p in partenaires)
-        texte.append(f"- {tops[banquier]} / {partenaires_txt}")
+        texte.append(f"- {tops[banquier]} / {partenaires_txt} — {mise} €")
     texte.append("*Total : 12 combinaisons à 1 € = 12 €*")
 
     return "\n\n".join(texte)
@@ -595,7 +595,14 @@ def main():
                 est_10_14 = 10 <= nb_partants_c <= 14
                 titre = f"{'🟢 ' if est_10_14 else ''}Course {c} ({nb_partants_c} partants)"
                 with st.expander(titre, expanded=False):
-                    afficher_top3_medailles(df_c, vert=est_10_14)
+                    if est_10_14:
+                        bloc = formater_jumele_reduit(df_c)
+                        if bloc:
+                            st.markdown(f":green[{bloc}]")
+                        else:
+                            afficher_top3_medailles(df_c, vert=True)
+                    else:
+                        afficher_top3_medailles(df_c)
 
     # ============================================================
     # AFFICHAGE DE LA COURSE SELECTIONNEE
